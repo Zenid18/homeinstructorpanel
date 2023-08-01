@@ -1,10 +1,26 @@
 import React, { useState } from "react";
 import Layout from "../layout/layout";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { TeacherProfile } from "../redux/services/AuthService";
 
 export default function MyAccount() {
+  const dispatch = useDispatch()
   const [sidebarActive, setSidebarActive] = useState("my-account");
-    const [showPassInstructors, setShowPassInstructors] = useState(false);
-    const [showConPassInstructors, setShowConPassInstructors] = useState(false);
+  const [showPassInstructors, setShowPassInstructors] = useState(false);
+  const [showConPassInstructors, setShowConPassInstructors] = useState(false);
+  const [profileData, setProfileData] = useState([])
+  const [firstName, setFirstName] = useState("")
+  const [lastName, setLastName] = useState("")
+  useEffect(() => {
+    getInstructorProfile()
+  }, [])
+  const getInstructorProfile = async () => {
+    const res = await dispatch(TeacherProfile())
+    if (res?.status == 200 || res?.success) {
+      setProfileData(res?.data)
+    }
+  }
   return (
     <div>
       <Layout sidebarActive={sidebarActive} setSidebarActive={setSidebarActive}>
