@@ -5,6 +5,7 @@ body {
   overflow-x: hidden;
   font-family: poppins;
 }
+
 ul,
 p,
 h1,
@@ -39,7 +40,7 @@ section {
   --green: #008E17;
   --d-green: #008C45;
   --l-green: #edffef;
-  --red-linear: linear-gradient(90deg,#f55454,#f24f4a,#ee4a40,#ea4636,#e5422b);
+  --red-linear: linear-gradient(90deg, #f55454, #f24f4a, #ee4a40, #ea4636, #e5422b);
 
   //FONTS VAR
   --fs-8: 0.5rem;
@@ -65,26 +66,40 @@ section {
   color: var(--white) !important;
   fill: var(--white) !important;
 }
+
 .black-text {
   color: var(--black) !important;
   fill: var(--black) !important;
 }
+
 .transition {
   transition: all 0.3s ease-in-out !important;
 }
+
 .cursor-pointer {
   cursor: pointer !important;
 }
+
 .fw-500 {
   font-weight: 500 !important;
 }
+
 .fw-600 {
   font-weight: 600 !important;
 }
-input:focus-visible, select:focus-visible, textarea:focus-visible{
+
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
   outline: unset;
 }
-.tooltip1, .tooltip2 {
+
+.error-border {
+  border: 1px solid var(--red) !important;
+}
+
+.tooltip1,
+.tooltip2 {
   position: relative;
   display: inline-block;
 }
@@ -100,7 +115,7 @@ input:focus-visible, select:focus-visible, textarea:focus-visible{
   padding: 5px 0;
   position: absolute;
   z-index: 1;
-  font-size:var(--fs-12);
+  font-size: var(--fs-12);
   bottom: -6px;
   left: 90px;
   margin-left: -60px;
@@ -111,54 +126,59 @@ input:focus-visible, select:focus-visible, textarea:focus-visible{
 .tooltip1 .tooltiptext::after {
   content: "";
   position: absolute;
-top: 37%;
-    transform: rotate(90deg);
-    left: -5px;
+  top: 37%;
+  transform: rotate(90deg);
+  left: -5px;
   margin-left: -5px;
   border-width: 5px;
   border-style: solid;
   border-color: var(--white) transparent transparent transparent;
 }
 
-.tooltip1:hover .tooltiptext, .tooltip2:hover .tooltiptext  {
+.tooltip1:hover .tooltiptext,
+.tooltip2:hover .tooltiptext {
   visibility: visible;
   opacity: 1;
 }
+
 .tooltip2 .tooltiptext {
   visibility: hidden;
-     width: 195px;
-    background-color: var(--white);
-    color: var(--d-pink);
-    filter: drop-shadow(0px 0px 14px rgba(255, 0, 0, 0.1));
-    text-align: center;
-    border-radius: 6px;
-    padding: 5px 0;
-    position: absolute;
-    z-index: 1;
-    font-size: var(--fs-12);
-    left: -95px;
-    margin-left: -60px;
-    opacity: 0;
-    transition: opacity 0.3s;
-    top: -40px;
+  width: 195px;
+  background-color: var(--white);
+  color: var(--d-pink);
+  filter: drop-shadow(0px 0px 14px rgba(255, 0, 0, 0.1));
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  font-size: var(--fs-12);
+  left: -95px;
+  margin-left: -60px;
+  opacity: 0;
+  transition: opacity 0.3s;
+  top: -40px;
 }
 
+
+
 .tooltip2 .tooltiptext::after {
-    content: "";
-    position: absolute;
-    top: 100%;
-    margin-left: -5px;
-    border-width: 5px;
-    border-style: solid;
-    border-color: var(--white) transparent transparent transparent;
-    right: 26px;
+  content: "";
+  position: absolute;
+  top: 100%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: var(--white) transparent transparent transparent;
+  right: 26px;
 }
 
 @media all and (min-width: 320px) and (max-width: 767px) {
   .tooltip2 .tooltiptext {
- left: -53px;
-}
-.tooltip2 .tooltiptext::after {
+    left: -53px;
+  }
+
+  .tooltip2 .tooltiptext::after {
     right: 68px;
-}
+  }
 }
