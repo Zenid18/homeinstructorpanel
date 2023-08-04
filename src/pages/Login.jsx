@@ -46,7 +46,7 @@ export default function Login() {
         </div>
         {/* INNER-BOX */}
         <div className="login-inner-box rounded-4 p-4 py-5 mx-3 p-sm-5">
-          <h2 className="fw-600 text-center pb-4">Login your Account</h2>
+          <h2 className="fw-600 text-center pb-4">Login your Account </h2>
           <form onSubmit={formik.handleSubmit}>
             <div className="mb-4">
               <div className="input-box mb-4 position-relative">
