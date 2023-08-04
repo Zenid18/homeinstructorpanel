@@ -17,8 +17,10 @@ export default function Navbar(props) {
   const [name, setName] = useState("");
   const userAccountDetails = useSelector((state) => state?.authReducer?.data);
   const handleLogout = () => {
+    toast.success("Logout successfully")
     localStorage.removeItem(storageKey?.AUTH_TOKEN);
-    navigate('/')
+    localStorage.removeItem(storageKey?.USER_DATA);
+    navigate("/", { replace: true });
   }
   useEffect(() => {
     const getUser = async () => {

@@ -8,7 +8,7 @@ import * as Yup from 'yup'
 
 export default function Login() {
   const dispatch = useDispatch();
-  const nevigate = useNavigate();
+  const navigate = useNavigate();
   const [showPassInstructors, setShowPassInstructors] = useState(false);
   const isLoading = useSelector((state) => state.authReducer.isLoading);
   const formik = useFormik({
@@ -29,7 +29,7 @@ export default function Login() {
       const res = await dispatch(TeacherLogin(body));
       if (res?.status == 200 || res?.success == true) {
         toast.success(res?.message);
-        nevigate("/dashboard")
+        navigate("/dashboard", { replace: true });
       } else {
         toast.error(res?.message);
       }
@@ -49,21 +49,6 @@ export default function Login() {
           <h2 className="fw-600 text-center pb-4">Login your Account</h2>
           <form onSubmit={formik.handleSubmit}>
             <div className="mb-4">
-              {/* <div className={`email-login rounded-pill d-flex position-relative justify-content-between ${formik.touched.email && formik.errors.email ? "error-border" : ""}`}>
-                <input
-                  className="border-0 py-2 ps-3  w-100 bg-transparent "
-                  type="email"
-                  name="email"
-                  onChange={formik.handleChange}
-                  onBlur={formik.handleBlur}
-                  value={formik.values.email}
-                  placeholder="Email Address"
-                />
-
-                <span className="py-2 pe-3 position-absolute">
-
-                </span>
-              </div> */}
               <div className="input-box mb-4 position-relative">
                 <input
                   type="email"

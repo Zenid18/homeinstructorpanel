@@ -120,6 +120,7 @@ export default function MyAccount() {
                         First Name
                       </label>
                       <input
+                        disabled
                         id="firstName"
                         placeholder="First Name"
                         className={`ps-2 rounded-1 p-2 ${formik.touched.firstName && formik.errors.firstName ? "border-danger" : ""}`}
@@ -139,6 +140,7 @@ export default function MyAccount() {
                         Last Name
                       </label>
                       <input
+                        disabled
                         id="lastName"
                         placeholder="Last Name"
                         className={`ps-2 rounded-1 p-2 ${formik.touched.lastName && formik.errors.lastName ? "border-danger" : ""}`}
@@ -158,6 +160,7 @@ export default function MyAccount() {
                         Email ID
                       </label>
                       <input
+                        disabled
                         id="email"
                         placeholder="Email ID"
                         className={`ps-2 rounded-1 p-2 ${formik.touched.email && formik.errors.email ? "border-danger" : ""}`}
@@ -217,6 +220,7 @@ export default function MyAccount() {
                         Usercode
                       </label>
                       <input
+                        disabled
                         id="usercode"
                         placeholder="usercode"
                         className={`ps-2 rounded-1 p-2 ${formik.touched.usercode && formik.errors.usercode ? "border-danger" : ""}`}
@@ -244,7 +248,7 @@ export default function MyAccount() {
                   </p>
                   <div className="profile-img">
                     <img
-                      src={image ? image : "/images/profile-img.png"}
+                      src={image ? image : "/images/svg/profile.svg"}
                       className="img-fluid rounded-1 w-100"
                       alt="profile-img"
                     />
