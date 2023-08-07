@@ -87,7 +87,9 @@ section {
 .fw-600 {
   font-weight: 600 !important;
 }
-
+.verified-para{
+  font-size: var(--fs-12);
+}
 input:focus-visible,
 select:focus-visible,
 textarea:focus-visible {

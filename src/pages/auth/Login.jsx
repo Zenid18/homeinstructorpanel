@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { TeacherLogin } from "../redux/services/AuthService";
+// import { TeacherLogin } from "../redux/services/AuthService";
+import { TeacherLogin } from "../../redux/services/AuthService";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useFormik } from "formik";
 import * as Yup from 'yup'
@@ -144,9 +145,9 @@ export default function Login() {
               )}
             </button>
             <div className="forgot-pass text-end">
-              <a href="" className=" text-decoration-none">
+              <Link to="/forgot" className=" text-decoration-none">
                 Forgot Password
-              </a>
+              </Link>
             </div>
           </form>
         </div>

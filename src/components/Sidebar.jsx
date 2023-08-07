@@ -60,12 +60,15 @@ export default function Sidebar(props) {
           </Link>
         </div>
         <div
-          onClick={() => props.setSidebarActive("resource")}
+          onClick={() => props.setSidebarActive("builders")}
           className={`sidebar-item rounded-3 p-2 ps-3 ${
-            props.sidebarActive == "resource" ? "sidebar-active" : ""
+            props.sidebarActive == "builders" ? "sidebar-active" : ""
           } `}
         >
-          <Link className="text-decoration-none text-decoration-none d-flex gap-3 align-items-center">
+          <Link
+            to="/builders"
+            className="text-decoration-none text-decoration-none d-flex gap-3 align-items-center"
+          >
             <div className="sidebar-item-icon rounded-3 d-flex align-items-center justify-content-center">
               <span>
                 <svg
@@ -77,7 +80,7 @@ export default function Sidebar(props) {
                   <path
                     d="M16.9583 3.66602H5.04167C4.53541 3.66602 4.125 4.07642 4.125 4.58268V19.2493C4.125 19.7556 4.53541 20.166 5.04167 20.166H16.9583C17.4646 20.166 17.875 19.7556 17.875 19.2493V4.58268C17.875 4.07642 17.4646 3.66602 16.9583 3.66602Z"
                     stroke={
-                      props.sidebarActive == "resource"
+                      props.sidebarActive == "builders"
                         ? "var(--red)"
                         : "#9A9A9A"
                     }
@@ -87,7 +90,7 @@ export default function Sidebar(props) {
                   <path
                     d="M8.25 1.83301V4.58301"
                     stroke={
-                      props.sidebarActive == "resource"
+                      props.sidebarActive == "builders"
                         ? "var(--red)"
                         : "#9A9A9A"
                     }
@@ -98,7 +101,7 @@ export default function Sidebar(props) {
                   <path
                     d="M13.75 1.83301V4.58301"
                     stroke={
-                      props.sidebarActive == "resource"
+                      props.sidebarActive == "builders"
                         ? "var(--red)"
                         : "#9A9A9A"
                     }
