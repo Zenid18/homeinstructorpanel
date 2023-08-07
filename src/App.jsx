@@ -2,6 +2,7 @@ import React from "react";
 import Routes from "./routes/PageRoutes";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Loader from "./components/loader";
 
 function App() {
   return (
@@ -16,8 +17,9 @@ function App() {
         pauseOnFocusLoss
         draggable
         pauseOnHover
-        theme="dark"
+        theme="colored"
       />
+      <Loader />
       <Routes />
     </div>
   );

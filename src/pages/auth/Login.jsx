@@ -136,13 +136,8 @@ export default function Login() {
               type="submit"
               className="login-btn white-text fw-600 w-100  rounded-pill mt-4 border-0"
             >
-              {isLoading ? (
-                <div class="spinner-border" role="status">
-                  <span class="visually-hidden">Loading...</span>
-                </div>
-              ) : (
-                "Login"
-              )}
+              Login
+
             </button>
             <div className="forgot-pass text-end">
               <Link to="/forgot" className=" text-decoration-none">
