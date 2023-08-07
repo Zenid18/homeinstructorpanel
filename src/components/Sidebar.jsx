@@ -76,20 +76,32 @@ export default function Sidebar(props) {
                 >
                   <path
                     d="M16.9583 3.66602H5.04167C4.53541 3.66602 4.125 4.07642 4.125 4.58268V19.2493C4.125 19.7556 4.53541 20.166 5.04167 20.166H16.9583C17.4646 20.166 17.875 19.7556 17.875 19.2493V4.58268C17.875 4.07642 17.4646 3.66602 16.9583 3.66602Z"
-                    stroke="#9A9A9A"
+                    stroke={
+                      props.sidebarActive == "resource"
+                        ? "var(--red)"
+                        : "#9A9A9A"
+                    }
                     strokeWidth="2"
                     strokeLinejoin="round"
                   />
                   <path
                     d="M8.25 1.83301V4.58301"
-                    stroke="#9A9A9A"
+                    stroke={
+                      props.sidebarActive == "resource"
+                        ? "var(--red)"
+                        : "#9A9A9A"
+                    }
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"
                   />
                   <path
                     d="M13.75 1.83301V4.58301"
-                    stroke="#9A9A9A"
+                    stroke={
+                      props.sidebarActive == "resource"
+                        ? "var(--red)"
+                        : "#9A9A9A"
+                    }
                     strokeWidth="2"
                     strokeLinecap="round"
                     strokeLinejoin="round"

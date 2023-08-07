@@ -70,7 +70,7 @@ export default function Navbar(props) {
   })
   return (
     <>
-      <header className="header px-4 py-3 position-fixed transition">
+      <header className="header px-4 py-1 position-fixed transition">
         <nav className="navbar nav-bar-main navbar-expand-lg rounded-2 ">
           <div className="container-fluid">
             <button
