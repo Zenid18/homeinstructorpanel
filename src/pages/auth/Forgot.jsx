@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { TeacherLogin } from "../../redux/services/AuthService";
-import { useDispatch, useSelector } from "react-redux";
+import { TeacherForgot } from "../../redux/services/AuthService";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useFormik } from "formik";
@@ -16,20 +16,20 @@ export default function Forgot() {
     validationSchema: Yup.object({
       email: Yup.string().email().required("Email is required"),
     }),
-    // onSubmit: async () => {
-    //   const body = {
-    //     email_id: formik?.values?.email,
-    //   };
-    //   console.log(body);
-    //   const res = await dispatch(TeacherLogin(body));
-    //   if (res?.status == 200 || res?.success == true) {
-    //     toast.success(res?.message);
-    //     navigate("/dashboard", { replace: true });
-    //   } else {
-    //     toast.error(res?.message);
-    //   }
-    //   formik.setSubmitting(false);
-    // },
+    onSubmit: async () => {
+      const body = {
+        email_id: formik?.values?.email,
+      };
+      console.log(body);
+      const res = await dispatch(TeacherForgot(body));
+      if (res?.status == 200 || res?.success == true) {
+        toast.success(res?.message);
+        navigate("/otp", { replace: true });
+      } else {
+        toast.error(res?.message);
+      }
+      formik.setSubmitting(false);
+    },
   });
   return (
     // MAIN DIV
@@ -76,7 +76,6 @@ export default function Forgot() {
               </div>
             </div>
             <button
-              onClick={() => navigate("/otp")}
               type="submit"
               className="login-btn white-text fw-600 w-100  rounded-pill mt-2 border-0"
             >

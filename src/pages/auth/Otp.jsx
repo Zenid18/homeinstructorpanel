@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import { TeacherLogin } from "../../redux/services/AuthService";
-import { useDispatch, useSelector } from "react-redux";
+import { TeacherOtp } from "../../redux/services/AuthService";
+import { useDispatch} from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useFormik } from "formik";
@@ -23,10 +23,10 @@ export default function Otp() {
         email_id: formik?.values?.email,
       };
       console.log(body);
-      const res = await dispatch(TeacherLogin(body));
+      const res = await dispatch(TeacherOtp(body));
       if (res?.status == 200 || res?.success == true) {
         toast.success(res?.message);
-        navigate("/dashboard", { replace: true });
+        navigate("/verified", { replace: true });
       } else {
         toast.error(res?.message);
       }
@@ -60,7 +60,6 @@ export default function Otp() {
             />
             <button
               type="submit"
-              onClick={() => navigate("/verified")}
               className="login-btn white-text fw-600 w-100  rounded-pill mt-2 border-0"
             >
               Verify
