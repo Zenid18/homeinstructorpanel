@@ -4,12 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useFormik } from "formik";
-import * as Yup from 'yup'
+import * as Yup from "yup";
 
 export default function Forgot() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const isLoading = useSelector((state) => state.authReducer.isLoading);
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -17,22 +16,21 @@ export default function Forgot() {
     validationSchema: Yup.object({
       email: Yup.string().email().required("Email is required"),
     }),
-    onSubmit: async () => {
-      const body = {
-        email_id: formik?.values?.email,
-      };
-      console.log(body);
-      const res = await dispatch(TeacherLogin(body));
-      if (res?.status == 200 || res?.success == true) {
-        toast.success(res?.message);
-        navigate("/dashboard", { replace: true });
-      } else {
-        toast.error(res?.message);
-      }
-      formik.setSubmitting(false)
-
-    }
-  })
+    // onSubmit: async () => {
+    //   const body = {
+    //     email_id: formik?.values?.email,
+    //   };
+    //   console.log(body);
+    //   const res = await dispatch(TeacherLogin(body));
+    //   if (res?.status == 200 || res?.success == true) {
+    //     toast.success(res?.message);
+    //     navigate("/dashboard", { replace: true });
+    //   } else {
+    //     toast.error(res?.message);
+    //   }
+    //   formik.setSubmitting(false);
+    // },
+  });
   return (
     // MAIN DIV
     <div className="login-section vw-100 vh-100 d-flex align-items-start justify-content-center">
@@ -53,7 +51,11 @@ export default function Forgot() {
                   onBlur={formik.handleBlur}
                   value={formik.values.email}
                   name="email"
-                  className={`w-100 py-2 ps-4 rounded-pill transition ${formik.touched.email && formik.errors.email ? "error-border" : ""}`}
+                  className={`w-100 py-2 ps-4 rounded-pill transition ${
+                    formik.touched.email && formik.errors.email
+                      ? "error-border"
+                      : ""
+                  }`}
                 />
                 <span className="pass-btn pass-btn rounded-pill pe-3 d-flex align-items-center">
                   <svg
@@ -67,21 +69,18 @@ export default function Forgot() {
                   </svg>
                 </span>
                 {formik.touched.email && formik.errors.email && (
-                  <span className="text-danger fs-6">{formik.errors.email}</span>
+                  <span className="text-danger fs-6">
+                    {formik.errors.email}
+                  </span>
                 )}
               </div>
             </div>
             <button
+              onClick={() => navigate("/otp")}
               type="submit"
               className="login-btn white-text fw-600 w-100  rounded-pill mt-2 border-0"
             >
-              {isLoading ? (
-                <div class="spinner-border" role="status">
-                  <span class="visually-hidden">Loading...</span>
-                </div>
-              ) : (
-                "Send Link"
-              )}
+              Send OTP
             </button>
           </form>
         </div>

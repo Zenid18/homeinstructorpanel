@@ -6,6 +6,7 @@ import Builders from "../pages/Builders";
 import Forgot from "../pages/auth/Forgot";
 import Reset from "../pages/auth/Reset";
 import Verified from "../pages/auth/Verified";
+import Otp from "../pages/auth/Otp";
 
 export default function PageRoutes() {
   const routes = [
@@ -28,6 +29,10 @@ export default function PageRoutes() {
     {
       path: "/dashboard",
       Component: Dashboard,
+    },
+    {
+      path: "/otp",
+      Component: Otp,
     },
     {
       path: "/my-account",

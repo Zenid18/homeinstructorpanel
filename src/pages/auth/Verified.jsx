@@ -1,6 +1,8 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Verified() {
+  const navigate = useNavigate()
   return (
     // MAIN DIV
     <div className="login-section vw-100 vh-100 d-flex align-items-start justify-content-center">
@@ -14,8 +16,14 @@ export default function Verified() {
           <p className="verified-para">
             You have successfully verified account.
           </p>
-          <img className="py-3" width={110} src="/images/verified.png" alt="verified" />
+          <img
+            className="py-3"
+            width={110}
+            src="/images/verified.png"
+            alt="verified"
+          />
           <button
+            onClick={() => navigate("/reset")}
             type="submit"
             className="login-btn white-text fw-600 w-100  rounded-pill mt-2 border-0"
           >

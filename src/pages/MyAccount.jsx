@@ -29,7 +29,7 @@ export default function MyAccount() {
       setProfileData(res?.data)
       setDialCode(res?.data?.dailcode || "")
       setPhoneNo(res?.data?.phone || "")
-      setImage(res?.data?.teacher_img ? url?.BASE_URL + res?.data?.teacher_img : "")
+      setImage(res?.data?.teacher_img ? url?.BASE_URL + res?.data?.teacher_img : "")  
       setImageUri(res?.data?.teacher_img ? url?.BASE_URL + res?.data?.teacher_img : "")
     }
   }
@@ -43,6 +43,7 @@ export default function MyAccount() {
       address: profileData?.address || "",
       city: profileData?.city || "",
       country: profileData?.country || "",
+      state: profileData?.state || "",
       pincode: profileData?.pincode || "",
       info: profileData?.about || "",
       experi: profileData?.lang || "",
@@ -56,6 +57,7 @@ export default function MyAccount() {
       address: Yup.string().required("Address is required"),
       city: Yup.string().required("city is required"),
       country: Yup.string().required("Country is required"),
+      state: Yup.string().required("State is required"),
       pincode: Yup.string().required("Pincode is required"),
       experi: Yup.string().required("Languages are required"),
       // phone: Yup.number()
@@ -80,6 +82,7 @@ export default function MyAccount() {
       formData?.append("address", formik?.values?.address)
       formData?.append("city", formik?.values?.city)
       formData?.append("country", formik?.values?.country)
+      formData?.append("state", formik?.values?.state)
       formData?.append("about", formik?.values?.info)
       formData?.append("teacher_img", imageUri)
       const res = await dispatch(updateTeacherProfile(formData))
@@ -123,14 +126,20 @@ export default function MyAccount() {
                         disabled
                         id="firstName"
                         placeholder="First Name"
-                        className={`ps-2 rounded-1 p-2 ${formik.touched.firstName && formik.errors.firstName ? "border-danger" : ""}`}
+                        className={`ps-2 rounded-1 p-2 ${
+                          formik.touched.firstName && formik.errors.firstName
+                            ? "border-danger"
+                            : ""
+                        }`}
                         type="text"
                         onChange={formik?.handleChange}
                         onBlur={formik?.onBlur}
                         value={formik?.values?.firstName}
                       />
                       {formik.touched.firstName && formik.errors.firstName && (
-                        <span className="text-danger fs-6">{formik.errors.firstName}</span>
+                        <span className="text-danger fs-6">
+                          {formik.errors.firstName}
+                        </span>
                       )}
                     </div>
                   </div>
@@ -143,14 +152,20 @@ export default function MyAccount() {
                         disabled
                         id="lastName"
                         placeholder="Last Name"
-                        className={`ps-2 rounded-1 p-2 ${formik.touched.lastName && formik.errors.lastName ? "border-danger" : ""}`}
+                        className={`ps-2 rounded-1 p-2 ${
+                          formik.touched.lastName && formik.errors.lastName
+                            ? "border-danger"
+                            : ""
+                        }`}
                         type="text"
                         onChange={formik?.handleChange}
                         onBlur={formik?.onBlur}
                         value={formik?.values?.lastName}
                       />
                       {formik.touched.lastName && formik.errors.lastName && (
-                        <span className="text-danger fs-6">{formik.errors.lastName}</span>
+                        <span className="text-danger fs-6">
+                          {formik.errors.lastName}
+                        </span>
                       )}
                     </div>
                   </div>
@@ -163,14 +178,20 @@ export default function MyAccount() {
                         disabled
                         id="email"
                         placeholder="Email ID"
-                        className={`ps-2 rounded-1 p-2 ${formik.touched.email && formik.errors.email ? "border-danger" : ""}`}
+                        className={`ps-2 rounded-1 p-2 ${
+                          formik.touched.email && formik.errors.email
+                            ? "border-danger"
+                            : ""
+                        }`}
                         type="email"
                         onChange={formik?.handleChange}
                         onBlur={formik?.onBlur}
                         value={formik?.values?.email}
                       />
                       {formik.touched.email && formik.errors.email && (
-                        <span className="text-danger fs-6">{formik.errors.email}</span>
+                        <span className="text-danger fs-6">
+                          {formik.errors.email}
+                        </span>
                       )}
                     </div>
                   </div>
@@ -203,14 +224,20 @@ export default function MyAccount() {
                       <input
                         id="experi"
                         placeholder="Language"
-                        className={`ps-2 rounded-1 p-2 ${formik.touched.experi && formik.errors.experi ? "border-danger" : ""}`}
+                        className={`ps-2 rounded-1 p-2 ${
+                          formik.touched.experi && formik.errors.experi
+                            ? "border-danger"
+                            : ""
+                        }`}
                         type="text"
                         onChange={formik?.handleChange}
                         onBlur={formik?.onBlur}
                         value={formik?.values?.experi}
                       />
                       {formik.touched.experi && formik.errors.experi && (
-                        <span className="text-danger fs-6">{formik.errors.experi}</span>
+                        <span className="text-danger fs-6">
+                          {formik.errors.experi}
+                        </span>
                       )}
                     </div>
                   </div>
@@ -223,18 +250,23 @@ export default function MyAccount() {
                         disabled
                         id="usercode"
                         placeholder="usercode"
-                        className={`ps-2 rounded-1 p-2 ${formik.touched.usercode && formik.errors.usercode ? "border-danger" : ""}`}
+                        className={`ps-2 rounded-1 p-2 ${
+                          formik.touched.usercode && formik.errors.usercode
+                            ? "border-danger"
+                            : ""
+                        }`}
                         type="text"
                         onChange={formik?.handleChange}
                         onBlur={formik?.onBlur}
                         value={formik?.values?.usercode}
                       />
                       {formik.touched.usercode && formik.errors.usercode && (
-                        <span className="text-danger fs-6">{formik.errors.usercode}</span>
+                        <span className="text-danger fs-6">
+                          {formik.errors.usercode}
+                        </span>
                       )}
                     </div>
                   </div>
-
                 </div>
               </div>
               <div className="col-md-3">
@@ -243,17 +275,23 @@ export default function MyAccount() {
                     Profile Update
                     <div class="tooltip2 ms-1">
                       <img src="/images/svg/info-icon.svg" alt="info" />
-                      <span class="tooltiptext">Upload image upto 2 mb</span>
+                      <span class="tooltiptext">
+                        Upload image up to 2 mb <br /> and Size(303 x 266)
+                      </span>
                     </div>
                   </p>
-                  <div className="profile-img">
+                  <div className={`profile-img ${image ? "border p-4" : ""}`}>
                     <img
-                      src={image ? image : "/images/svg/profile.svg"}
+                      src={image ? image : "/images/profile.png"}
                       className="img-fluid rounded-1 w-100"
                       alt="profile-img"
+                      style={image ? { height: "179px" } : { height: "227px" }}
                     />
                   </div>
-                  <label className="images-upload py-2 w-100 rounded-1 text-nowrap text-center cursor-pointer" htmlFor="image-upload">
+                  <label
+                    className="images-upload py-2 w-100 rounded-1 text-nowrap text-center cursor-pointer"
+                    htmlFor="image-upload"
+                  >
                     Change Image
                   </label>
                   <input
@@ -265,15 +303,12 @@ export default function MyAccount() {
                       accept: "image/*",
                     }}
                   />
-
-
-
                 </div>
               </div>
             </div>
             <h2 className="fw-600 pb-4">Other Information</h2>
             <div className="row">
-              <div className="col-md-6">
+              <div className="col-md-4">
                 <div className="form-box d-flex flex-column pb-4">
                   <label className="pb-1" htmlFor="pincode">
                     Pin code / Zip code
@@ -281,19 +316,25 @@ export default function MyAccount() {
                   <input
                     id="pincode"
                     placeholder="Pin code / Zip code"
-                    className={`ps-2 rounded-1 p-2 ${formik.touched.pincode && formik.errors.pincode ? "border-danger" : ""}`}
+                    className={`ps-2 rounded-1 p-2 ${
+                      formik.touched.pincode && formik.errors.pincode
+                        ? "border-danger"
+                        : ""
+                    }`}
                     onChange={formik?.handleChange}
                     onBlur={formik?.onBlur}
                     value={formik?.values?.pincode}
                     type="number"
                   />
                   {formik.touched.pincode && formik.errors.pincode && (
-                    <span className="text-danger fs-6">{formik.errors.pincode}</span>
+                    <span className="text-danger fs-6">
+                      {formik.errors.pincode}
+                    </span>
                   )}
                 </div>
               </div>
 
-              <div className="col-md-6">
+              <div className="col-md-4">
                 <div className="form-box d-flex flex-column pb-4">
                   <label className="pb-1" htmlFor="address">
                     Address
@@ -301,37 +342,25 @@ export default function MyAccount() {
                   <input
                     id="address"
                     placeholder="Address"
-                    className={`ps-2 rounded-1 p-2 ${formik.touched.address && formik.errors.address ? "border-danger" : ""}`}
+                    className={`ps-2 rounded-1 p-2 ${
+                      formik.touched.address && formik.errors.address
+                        ? "border-danger"
+                        : ""
+                    }`}
                     type="text"
                     onChange={formik?.handleChange}
                     onBlur={formik?.onBlur}
                     value={formik?.values?.address}
                   />
                   {formik.touched.address && formik.errors.address && (
-                    <span className="text-danger fs-6">{formik.errors.address}</span>
+                    <span className="text-danger fs-6">
+                      {formik.errors.address}
+                    </span>
                   )}
                 </div>
               </div>
-              <div className="col-md-6">
-                <div className="form-box d-flex flex-column pb-4">
-                  <label className="pb-1" htmlFor="city">
-                    City
-                  </label>
-                  <input
-                    id="city"
-                    placeholder="City"
-                    className={`ps-2 rounded-1 p-2 ${formik.touched.city && formik.errors.city ? "border-danger" : ""}`}
-                    onChange={formik?.handleChange}
-                    onBlur={formik?.onBlur}
-                    value={formik?.values?.city}
-                    type="text"
-                  />
-                  {formik.touched.city && formik.errors.city && (
-                    <span className="text-danger fs-6">{formik.errors.city}</span>
-                  )}
-                </div>
-              </div>
-              <div className="col-md-6">
+              <div className="col-md-4"></div>
+              <div className="col-md-4">
                 <div className="form-box d-flex flex-column pb-4">
                   <label className="pb-1" htmlFor="country">
                     Country
@@ -339,24 +368,83 @@ export default function MyAccount() {
                   <input
                     id="country"
                     placeholder="Country"
-                    className={`ps-2 rounded-1 p-2 ${formik.touched.country && formik.errors.country ? "border-danger" : ""}`}
+                    className={`ps-2 rounded-1 p-2 ${
+                      formik.touched.country && formik.errors.country
+                        ? "border-danger"
+                        : ""
+                    }`}
                     onChange={formik?.handleChange}
                     onBlur={formik?.onBlur}
                     value={formik?.values?.country}
                     type="text"
                   />
                   {formik.touched.country && formik.errors.country && (
-                    <span className="text-danger fs-6">{formik.errors.country}</span>
+                    <span className="text-danger fs-6">
+                      {formik.errors.country}
+                    </span>
                   )}
                 </div>
               </div>
+
+              <div className="col-md-4">
+                <div className="form-box d-flex flex-column pb-4">
+                  <label className="pb-1" htmlFor="state">
+                    State
+                  </label>
+                  <input
+                    id="state"
+                    placeholder="state"
+                    className={`ps-2 rounded-1 p-2 ${
+                      formik.touched.state && formik.errors.state
+                        ? "border-danger"
+                        : ""
+                    }`}
+                    onChange={formik?.handleChange}
+                    onBlur={formik?.onBlur}
+                    value={formik?.values?.state}
+                    type="text"
+                  />
+                  {formik.touched.state && formik.errors.state && (
+                    <span className="text-danger fs-6">
+                      {formik.errors.state}
+                    </span>
+                  )}
+                </div>
+              </div>
+              <div className="col-md-4"></div>
+              <div className="col-md-4">
+                <div className="form-box d-flex flex-column pb-4">
+                  <label className="pb-1" htmlFor="city">
+                    City
+                  </label>
+                  <input
+                    id="city"
+                    placeholder="City"
+                    className={`ps-2 rounded-1 p-2 ${
+                      formik.touched.city && formik.errors.city
+                        ? "border-danger"
+                        : ""
+                    }`}
+                    onChange={formik?.handleChange}
+                    onBlur={formik?.onBlur}
+                    value={formik?.values?.city}
+                    type="text"
+                  />
+                  {formik.touched.city && formik.errors.city && (
+                    <span className="text-danger fs-6">
+                      {formik.errors.city}
+                    </span>
+                  )}
+                </div>
+              </div>
+
               <div className="col-md-12">
                 <div className="form-box d-flex flex-column pb-4">
                   <label className="pb-3" htmlFor="info">
                     About Info{" "}
                     <div class="tooltip1 ms-1">
                       <img src="/images/svg/info-icon.svg" alt="info" />
-                      <span class="tooltiptext">Minimum words 200</span>
+                      <span class="tooltiptext">Maximum 400 characters</span>
                     </div>
                   </label>
 
@@ -372,7 +460,11 @@ export default function MyAccount() {
                 </div>
               </div>
             </div>
-            <button type="submit" disabled={formik.isSubmitting} className="border-0 p-2 px-5 save-btn white-text">
+            <button
+              type="submit"
+              disabled={formik.isSubmitting}
+              className="border-0 p-2 px-5 save-btn white-text"
+            >
               Save Changes
             </button>
           </div>

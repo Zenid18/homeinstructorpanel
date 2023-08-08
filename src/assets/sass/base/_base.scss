@@ -30,6 +30,7 @@ section {
   --grey: #C9C9C9;
   --d-grey: #787A8D;
   --blue: #2F327D;
+  --d-blue: #505050;
   --l-blue: #809FB8;
   --sky-blue: #F5F7FA;
   --red: #D30000;
@@ -37,6 +38,7 @@ section {
   --pink: #FFC7E4;
   --l-pink: #fff3f9;
   --d-pink: #FF426F;
+  --l-green: #C7FFDF;
   --green: #008E17;
   --d-green: #008C45;
   --l-green: #edffef;
@@ -87,11 +89,29 @@ section {
 .fw-600 {
   font-weight: 600 !important;
 }
-
+.send-btn button{
+  color: var(--d-green);
+}
 .verified-para {
   font-size: var(--fs-12);
+  color: var(--d-grey);
 }
-
+.otp-box input{
+width: 50px !important;
+height: 50px !important;
+background: var(--l-grey);
+border: 0;
+border-radius: 3px;
+}
+.otp-box input:focus{
+  border: 2px solid var(--red);
+  color: var(--d-pink);
+  background: var(--white);
+}
+.otp-box span{
+visibility: hidden;
+padding: 0 8px;
+}
 input:focus-visible,
 select:focus-visible,
 textarea:focus-visible {
@@ -161,7 +181,7 @@ textarea:focus-visible {
   margin-left: -60px;
   opacity: 0;
   transition: opacity 0.3s;
-  top: -40px;
+  top: -51px;
 }
 
 
@@ -188,5 +208,15 @@ textarea:focus-visible {
 
   .tooltip2 .tooltiptext::after {
     right: 68px;
+  }
+  .tooltip1 .tooltiptext {
+        bottom: 30px;
+    left: 47px;
+  }
+
+  .tooltip1  .tooltiptext::after {
+    bottom: -7px;
+    left: 22px;
+    top: 0;
   }
 }

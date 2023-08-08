@@ -11,7 +11,6 @@ export default function Reset() {
   const navigate = useNavigate();
   const [showComPass, setShowComPass] = useState(false);
   const [showNewPass, setShowNewPass] = useState(false);
-  const isLoading = useSelector((state) => state.authReducer.isLoading);
   const formik = useFormik({
     initialValues: {
       newPassword: "",
@@ -21,21 +20,21 @@ export default function Reset() {
       newPassword: Yup.string().required("Password is required"),
       conpassword: Yup.string().required("Password is required"),
     }),
-    onSubmit: async () => {
-      const body = {
-        newPassword: formik?.values?.password,
-        conpassword: formik?.values?.password,
-      };
-      console.log(body);
-      const res = await dispatch(TeacherLogin(body));
-      if (res?.status == 200 || res?.success == true) {
-        toast.success(res?.message);
-        navigate("/dashboard", { replace: true });
-      } else {
-        toast.error(res?.message);
-      }
-      formik.setSubmitting(false);
-    },
+    // onSubmit: async () => {
+    //   const body = {
+    //     newPassword: formik?.values?.password,
+    //     conpassword: formik?.values?.password,
+    //   };
+    //   console.log(body);
+    //   const res = await dispatch(TeacherLogin(body));
+    //   if (res?.status == 200 || res?.success == true) {
+    //     toast.success(res?.message);
+    //     navigate("/dashboard", { replace: true });
+    //   } else {
+    //     toast.error(res?.message);
+    //   }
+    //   formik.setSubmitting(false);
+    // },
   });
   return (
     // MAIN DIV
@@ -159,21 +158,18 @@ export default function Reset() {
                   )}
                 </button>
                 {formik.touched.comPassword && formik.errors.comPassword && (
-                  <span className="text-danger ">{formik.errors.comPassword}</span>
+                  <span className="text-danger ">
+                    {formik.errors.comPassword}
+                  </span>
                 )}
               </div>
             </div>
             <button
               type="submit"
+              onClick={() => navigate("/")}
               className="login-btn white-text fw-600 w-100  rounded-pill mt-4 border-0"
             >
-              {isLoading ? (
-                <div class="spinner-border" role="status">
-                  <span class="visually-hidden">Loading...</span>
-                </div>
-              ) : (
-                "Reset"
-              )}
+              Reset
             </button>
           </form>
         </div>
