@@ -1,12 +1,14 @@
 import React, { useState } from "react";
-import { TeacherLogin } from "../../redux/services/AuthService";
+import { TeacherLogin, resetPassword } from "../../redux/services/AuthService";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useFormik } from "formik";
 import * as Yup from 'yup'
 
 export default function Reset() {
+  const location = useLocation();
+  const data = location.state
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [showComPass, setShowComPass] = useState(false);
@@ -17,25 +19,27 @@ export default function Reset() {
       comPassword: "",
     },
     validationSchema: Yup.object({
-      newPassword: Yup.string().required("Password is required"),
-      conpassword: Yup.string().required("Password is required"),
+      // newPassword: Yup.string().required(" New Password is required"),
+      // conpassword: Yup.string().required(" Confirm Password is required"),
     }),
-    // onSubmit: async () => {
-    //   const body = {
-    //     newPassword: formik?.values?.password,
-    //     conpassword: formik?.values?.password,
-    //   };
-    //   console.log(body);
-    //   const res = await dispatch(TeacherLogin(body));
-    //   if (res?.status == 200 || res?.success == true) {
-    //     toast.success(res?.message);
-    //     navigate("/dashboard", { replace: true });
-    //   } else {
-    //     toast.error(res?.message);
-    //   }
-    //   formik.setSubmitting(false);
-    // },
+    onSubmit: async () => {
+      const body = {
+        new_password: formik?.values?.newPassword,
+        confirm_password: formik?.values?.comPassword,
+        email_id: data
+      };
+      const res = await dispatch(resetPassword(body));
+      if (res?.status == 200 || res?.success == true) {
+        toast.success(res?.message);
+        navigate("/");
+      } else {
+        toast.error(res?.message);
+      }
+      formik.setSubmitting(false);
+    },
   });
+
+  console.log(data, '//////')
   return (
     // MAIN DIV
     <div className="login-section vw-100 vh-100 d-flex align-items-start justify-content-center">
@@ -57,11 +61,10 @@ export default function Reset() {
                   onBlur={formik.handleBlur}
                   value={formik.values.newPassword}
                   name="newPassword"
-                  className={`w-100 py-2 ps-4 rounded-pill transition ${
-                    formik.touched.newPassword && formik.errors.newPassword
-                      ? "error-border"
-                      : ""
-                  }`}
+                  className={`w-100 py-2 ps-4 rounded-pill transition ${formik.touched.newPassword && formik.errors.newPassword
+                    ? "error-border"
+                    : ""
+                    }`}
                 />
                 <button
                   type="button"
@@ -114,11 +117,10 @@ export default function Reset() {
                   onBlur={formik.handleBlur}
                   value={formik.values.comPassword}
                   name="comPassword"
-                  className={`w-100 py-2 ps-4 rounded-pill transition ${
-                    formik.touched.comPassword && formik.errors.comPassword
-                      ? "error-border"
-                      : ""
-                  }`}
+                  className={`w-100 py-2 ps-4 rounded-pill transition ${formik.touched.comPassword && formik.errors.comPassword
+                    ? "error-border"
+                    : ""
+                    }`}
                 />
                 <button
                   type="button"
@@ -166,7 +168,6 @@ export default function Reset() {
             </div>
             <button
               type="submit"
-              onClick={() => navigate("/")}
               className="login-btn white-text fw-600 w-100  rounded-pill mt-4 border-0"
             >
               Reset

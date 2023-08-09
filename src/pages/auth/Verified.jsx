@@ -1,8 +1,10 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export default function Verified() {
   const navigate = useNavigate()
+  const location = useLocation();
+  const data = location.state
   return (
     // MAIN DIV
     <div className="login-section vw-100 vh-100 d-flex align-items-start justify-content-center">
@@ -23,7 +25,7 @@ export default function Verified() {
             alt="verified"
           />
           <button
-            onClick={() => navigate("/reset")}
+            onClick={() => navigate("/reset", { state: data })}
             type="submit"
             className="login-btn white-text fw-600 w-100  rounded-pill mt-2 border-0"
           >

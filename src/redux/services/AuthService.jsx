@@ -1,4 +1,4 @@
-import { changePasswordError, changePasswordLoading, changePasswordSuccess, teacherForgotError, teacherForgotLoading, teacherForgotSuccess, teacherLoginError, teacherLoginLoading, teacherLoginSuccess, teacherOtpError, teacherOtpLoading, teacherOtpSuccess, teacherProfileError, teacherProfileLoading, teacherProfileSuccess, teacherUpdateProfileError, teacherUpdateProfileLoading, teacherUpdateProfileSuccess } from "../actions/AuthAction";
+import { changePasswordError, changePasswordLoading, changePasswordSuccess, resetPasswordError, resetPasswordLoading, resetPasswordSucess, teacherForgotError, teacherForgotLoading, teacherForgotSuccess, teacherLoginError, teacherLoginLoading, teacherLoginSuccess, teacherOtpError, teacherOtpLoading, teacherOtpSuccess, teacherProfileError, teacherProfileLoading, teacherProfileSuccess, teacherUpdateProfileError, teacherUpdateProfileLoading, teacherUpdateProfileSuccess } from "../actions/AuthAction";
 import * as url from "../../constants/urls";
 import * as Service from '../../constants/services'
 import { storeData, getData, storageKey } from "../../constants/storage";
@@ -74,7 +74,7 @@ export const TeacherProfile = () => async (dispatch) => {
       // storeData(storageKey.USER_DATA, JSON.stringify(response.data));
     }
     else {
-       dispatch(teacherProfileSuccess(false));
+      dispatch(teacherProfileSuccess(false));
     }
     return response;
   } catch (error) {
@@ -113,6 +113,26 @@ export const TeacherChangePassword = (body) => async (dispatch) => {
   } catch (error) {
     // console.log(error, 'err-----------');
     dispatch(changePasswordError(false));
+    return { message: error };
+  }
+};
+
+
+
+export const resetPassword = (body) => async (dispatch) => {
+  dispatch(resetPasswordLoading(true));
+  try {
+    const response = await Service.post(url.RESET_PASSWORD, "", body);
+    if (response.success == true || response?.status == 200) {
+      dispatch(resetPasswordSucess(false));
+      console.log(response, "LOGIN_API-----------");
+
+    }
+
+    return response;
+  } catch (error) {
+    // console.log(error, 'err-----------');
+    dispatch(resetPasswordError(false));
     return { message: error };
   }
 };

@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-
 export default function Forgot() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -24,7 +23,7 @@ export default function Forgot() {
       const res = await dispatch(TeacherForgot(body));
       if (res?.status == 200 || res?.success == true) {
         toast.success(res?.message);
-        navigate("/otp", { replace: true });
+        navigate('/otp', { state: formik?.values?.email });
       } else {
         toast.error(res?.message);
       }
@@ -51,11 +50,10 @@ export default function Forgot() {
                   onBlur={formik.handleBlur}
                   value={formik.values.email}
                   name="email"
-                  className={`w-100 py-2 ps-4 rounded-pill transition ${
-                    formik.touched.email && formik.errors.email
-                      ? "error-border"
-                      : ""
-                  }`}
+                  className={`w-100 py-2 ps-4 rounded-pill transition ${formik.touched.email && formik.errors.email
+                    ? "error-border"
+                    : ""
+                    }`}
                 />
                 <span className="pass-btn pass-btn rounded-pill pe-3 d-flex align-items-center">
                   <svg
