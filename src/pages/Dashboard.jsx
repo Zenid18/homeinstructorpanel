@@ -6,7 +6,11 @@ export default function Dashboard() {
       const [sidebarActive, setSidebarActive] = useState("dashboard");
   return (
     <div>
-      <Layout sidebarActive={sidebarActive} setSidebarActive={setSidebarActive}>
+      <Layout
+        heading="Dashboard"
+        sidebarActive={sidebarActive}
+        setSidebarActive={setSidebarActive}
+      >
         <div className="today-schedule-box rounded-2 p-2">
           <div className="row p-2 gap-3 gap-xl-0">
             <div className="col-xl-6">

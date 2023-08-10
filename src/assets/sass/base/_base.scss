@@ -29,6 +29,7 @@ section {
   --l-grey: #F6F6F6;
   --grey: #C9C9C9;
   --d-grey: #787A8D;
+  --course-blue:#2276FC;
   --blue: #2F327D;
   --d-blue: #505050;
   --l-blue: #809FB8;
@@ -85,7 +86,11 @@ section {
 .fw-500 {
   font-weight: 500 !important;
 }
-
+.back-btn{
+  color: var(--d-grey);
+  font-size: var(--fs-13);
+  padding-bottom: 3px;
+}
 .fw-600 {
   font-weight: 600 !important;
 }

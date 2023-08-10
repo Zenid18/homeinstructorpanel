@@ -7,6 +7,7 @@ import Forgot from "../pages/auth/Forgot";
 import Reset from "../pages/auth/Reset";
 import Verified from "../pages/auth/Verified";
 import Otp from "../pages/auth/Otp";
+import CourseNew from "../pages/course/CourseNew";
 
 export default function PageRoutes() {
   const routes = [
@@ -41,6 +42,10 @@ export default function PageRoutes() {
     {
       path: "/builders",
       Component: Builders,
+    },
+    {
+      path: "/course-new",
+      Component: CourseNew,
     },
   ];
 

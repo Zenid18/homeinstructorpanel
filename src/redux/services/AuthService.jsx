@@ -30,8 +30,7 @@ export const TeacherForgot = (body) => async (dispatch) => {
     if (response.success == true || response?.status == 200) {
       dispatch(teacherForgotSuccess(false));
       console.log(response, "Forgot_API-----------");
-      storeData(storageKey?.AUTH_TOKEN, response?.token);
-      storeData(storageKey.USER_DATA, JSON.stringify(response.data));
+ 
     }
     else {
       dispatch(teacherForgotSuccess(false));
@@ -50,8 +49,7 @@ export const TeacherOtp = (body) => async (dispatch) => {
     if (response.success == true || response?.status == 200) {
       dispatch(teacherOtpSuccess(false));
       console.log(response, "Otp_API-----------");
-      storeData(storageKey?.AUTH_TOKEN, response?.token);
-      storeData(storageKey.USER_DATA, JSON.stringify(response.data));
+      
     }
     else {
       dispatch(teacherOtpSuccess(false));

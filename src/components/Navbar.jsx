@@ -2,33 +2,33 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { getData, storageKey } from "../constants/storage";
 import { useFormik } from "formik";
-import * as Yup from 'yup'
+import * as Yup from "yup";
 import { TeacherChangePassword } from "../redux/services/AuthService";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import * as url from '../constants/urls'
+import * as url from "../constants/urls";
 export default function Navbar(props) {
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-  const [showPassInstructors, setShowPassInstructors] = useState(false)
-  const [showConPassInstructors, setShowConPassInstructors] = useState(false)
-  const [showNewPassInstructors, setShowNewPassInstructors] = useState(false)
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const [showPassInstructors, setShowPassInstructors] = useState(false);
+  const [showConPassInstructors, setShowConPassInstructors] = useState(false);
+  const [showNewPassInstructors, setShowNewPassInstructors] = useState(false);
   const [image, setImage] = useState("");
   const [name, setName] = useState("");
   const userAccountDetails = useSelector((state) => state?.authReducer?.data);
   const handleLogout = () => {
-    toast.success("Logout successfully")
+    toast.success("Logout successfully");
     localStorage.removeItem(storageKey?.AUTH_TOKEN);
     localStorage.removeItem(storageKey?.USER_DATA);
     navigate("/", { replace: true });
-  }
+  };
   useEffect(() => {
     const getUser = async () => {
-      const data = await getData(storageKey?.USER_DATA)
-      const data1 = JSON?.parse(data)
+      const data = await getData(storageKey?.USER_DATA);
+      const data1 = JSON?.parse(data);
       if (data1) {
-        setImage(data1?.teacher_img)
-        setName(data1?.first_name + " " + data1?.last_name)
+        setImage(data1?.teacher_img);
+        setName(data1?.first_name + " " + data1?.last_name);
       }
     };
     getUser();
@@ -43,34 +43,32 @@ export default function Navbar(props) {
       oldPassword: Yup.string().required("Password is required"),
       newPassword: Yup.string().required(" New Password is required"),
       confirmPass: Yup.string()
-        .oneOf([Yup.ref('newPassword'), null], 'Passwords must match')
-        .required('Confirm Password is required'),
+        .oneOf([Yup.ref("newPassword"), null], "Passwords must match")
+        .required("Confirm Password is required"),
     }),
     onSubmit: async () => {
       const body = {
         current_password: formik?.values?.oldPassword,
         new_password: formik?.values?.newPassword,
-        confirm_password: formik?.values?.confirmPass
+        confirm_password: formik?.values?.confirmPass,
       };
       const res = await dispatch(TeacherChangePassword(body));
       if (res?.status == 200 || res?.success == true) {
-        toast?.success(res?.message)
-        document.getElementById("closeAddModal").click()
-        formik.setFieldValue('oldPassword', '');
-        formik.setFieldValue('newPassword', '')
-        formik.setFieldValue('confirmPass', '')
-
-      }
-      else {
-        toast?.error(res?.message)
+        toast?.success(res?.message);
+        document.getElementById("closeAddModal").click();
+        formik.setFieldValue("oldPassword", "");
+        formik.setFieldValue("newPassword", "");
+        formik.setFieldValue("confirmPass", "");
+      } else {
+        toast?.error(res?.message);
       }
 
-      formik.setSubmitting(false)
-    }
-  })
+      formik.setSubmitting(false);
+    },
+  });
   return (
     <>
-      <header className="header px-4 py-1 position-fixed transition">
+      <header className="header px-4 py-1 position-fixed transition" style={props.courseLayout ? {background:"var(--white)"}:{}}>
         <nav className="navbar nav-bar-main navbar-expand-lg rounded-2 ">
           <div className="container-fluid">
             <button
@@ -79,9 +77,8 @@ export default function Navbar(props) {
             >
               <img src="/images/svg/toggle.svg" alt="toggle" />
             </button>
-            <h2 className="fw-600 d-none d-lg-block">Dashboard</h2>
+            <h2 className="fw-600 d-none d-lg-block">{props.heading}</h2>
             <Link className="d-block d-lg-none">
-              {" "}
               <img width={100} src="images/logo.png" alt="logo" />
             </Link>
             <button
@@ -100,14 +97,25 @@ export default function Navbar(props) {
               id="navbarSupportedContent"
             >
               <div className="right-navbar-items d-flex align-itemns-center justify-content-end gap-4">
-                <button className="border-0 bg-transparent">
-                  <img src="/images/svg/message-icon.svg" alt="message-icon" />
-                </button>
+                {!props.courseLayout && (
+                  <button className="border-0 bg-transparent">
+                    <img
+                      src="/images/svg/message-icon.svg"
+                      alt="message-icon"
+                    />
+                  </button>
+                )}
                 <button className="border-0 bg-transparent">
                   <img src="/images/svg/bell-icon.svg" alt="bell-icon" />
                 </button>
                 <div className="profile-box d-flex gap-3 align-items-center justify-content-center">
-                  <p className="fw-500">{userAccountDetails?.first_name || userAccountDetails?.last_name ? userAccountDetails?.first_name + userAccountDetails?.last_name : name}</p>
+                  <p className="fw-500">
+                    {userAccountDetails?.first_name ||
+                    userAccountDetails?.last_name
+                      ? userAccountDetails?.first_name +
+                        userAccountDetails?.last_name
+                      : name}
+                  </p>
                   <div className="profile-logo d-none d-lg-block">
                     <div class="dropdown">
                       <button
@@ -116,19 +124,24 @@ export default function Navbar(props) {
                         data-bs-toggle="dropdown"
                         aria-expanded="false"
                       >
-                        {userAccountDetails?.teacher_img || image ?
+                        {userAccountDetails?.teacher_img || image ? (
                           <img
-                            src={userAccountDetails?.teacher_img ? url?.BASE_URL + userAccountDetails?.teacher_img : url?.BASE_URL + image}
+                            src={
+                              userAccountDetails?.teacher_img
+                                ? url?.BASE_URL +
+                                  userAccountDetails?.teacher_img
+                                : url?.BASE_URL + image
+                            }
                             className="my-profile"
                             alt="profile-logo"
                           />
-                          :
+                        ) : (
                           <img
                             src="/images/profile-logo.png"
                             className="cursor-pointer"
                             alt="profile-logo"
                           />
-                        }
+                        )}
                       </button>
                       <ul class="dropdown-menu">
                         <li>
@@ -137,14 +150,22 @@ export default function Navbar(props) {
                           </Link>
                         </li>
                         <li>
-                          <p data-bs-toggle="modal"
-                            data-bs-target="#changepassword" class="dropdown-item cursor-pointer" >
-
+                          <p
+                            data-bs-toggle="modal"
+                            data-bs-target="#changepassword"
+                            class="dropdown-item cursor-pointer"
+                          >
                             Change Password
                           </p>
                         </li>
                         <li>
-                          <span onClick={() => { handleLogout() }} class="dropdown-item cursor-pointer" to="">
+                          <span
+                            onClick={() => {
+                              handleLogout();
+                            }}
+                            class="dropdown-item cursor-pointer"
+                            to=""
+                          >
                             Log out
                           </span>
                         </li>
@@ -179,7 +200,6 @@ export default function Navbar(props) {
                     width={25}
                     src="/images/close-icon.png"
                     alt="close-icon"
-
                   />
                 </button>
               </div>
@@ -192,13 +212,15 @@ export default function Navbar(props) {
                     onBlur={formik.handleBlur}
                     name="oldPassword"
                     placeholder="password"
-                    className={`w-100 py-2 ps-4 rounded-pill transition ${formik.touched.oldPassword && formik.errors.oldPassword ? "border-danger" : ""}`}
+                    className={`w-100 py-2 ps-4 rounded-pill transition ${
+                      formik.touched.oldPassword && formik.errors.oldPassword
+                        ? "border-danger"
+                        : ""
+                    }`}
                   />
                   <button
                     type="button"
-                    onClick={() =>
-                      setShowPassInstructors(!showPassInstructors)
-                    }
+                    onClick={() => setShowPassInstructors(!showPassInstructors)}
                     className="border-0 pass-btn rounded-pill bg-transparent pe-3"
                   >
                     {showPassInstructors ? (
@@ -234,9 +256,10 @@ export default function Navbar(props) {
                     )}
                   </button>
                   {formik.touched.oldPassword && formik.errors.oldPassword && (
-                    <span className="text-danger fs-6">{formik.errors.oldPassword}</span>
+                    <span className="text-danger fs-6">
+                      {formik.errors.oldPassword}
+                    </span>
                   )}
-
                 </div>
                 <div className="input-box mb-4 position-relative">
                   <input
@@ -246,8 +269,11 @@ export default function Navbar(props) {
                     onBlur={formik.handleBlur}
                     value={formik.values.newPassword}
                     name="newPassword"
-                    className={`w-100 py-2 ps-4 rounded-pill transition ${formik.touched.newPassword && formik.errors.newPassword ? "border-danger" : ""}`}
-
+                    className={`w-100 py-2 ps-4 rounded-pill transition ${
+                      formik.touched.newPassword && formik.errors.newPassword
+                        ? "border-danger"
+                        : ""
+                    }`}
                   />
                   <button
                     type="button"
@@ -289,7 +315,9 @@ export default function Navbar(props) {
                     )}
                   </button>
                   {formik.touched.newPassword && formik.errors.newPassword && (
-                    <span className="text-danger fs-6">{formik.errors.newPassword}</span>
+                    <span className="text-danger fs-6">
+                      {formik.errors.newPassword}
+                    </span>
                   )}
                 </div>
                 <div className="input-box mb-4 position-relative">
@@ -300,8 +328,11 @@ export default function Navbar(props) {
                     onBlur={formik.handleBlur}
                     value={formik.values.confirmPass}
                     name="confirmPass"
-                    className={`w-100 py-2 ps-4 rounded-pill transition ${formik.touched.confirmPass && formik.errors.confirmPass ? "border-danger" : ""}`}
-
+                    className={`w-100 py-2 ps-4 rounded-pill transition ${
+                      formik.touched.confirmPass && formik.errors.confirmPass
+                        ? "border-danger"
+                        : ""
+                    }`}
                   />
                   <button
                     type="button"
@@ -343,11 +374,16 @@ export default function Navbar(props) {
                     )}
                   </button>
                   {formik.touched.confirmPass && formik.errors.confirmPass && (
-                    <span className="text-danger fs-6">{formik.errors.confirmPass}</span>
+                    <span className="text-danger fs-6">
+                      {formik.errors.confirmPass}
+                    </span>
                   )}
                 </div>
                 <button
-                  disabled={formik.isSubmitting} type="submit" className="add-btn border-0 w-100 rounded-pill py-2 white-text fw-600">
+                  disabled={formik.isSubmitting}
+                  type="submit"
+                  className="add-btn border-0 w-100 rounded-pill py-2 white-text fw-600"
+                >
                   Change Password
                 </button>
               </form>

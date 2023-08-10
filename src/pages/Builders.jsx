@@ -6,7 +6,11 @@ export default function Builders() {
         const [sidebarActive, setSidebarActive] = useState("builders");
   return (
     <div className="">
-      <Layout sidebarActive={sidebarActive} setSidebarActive={setSidebarActive}>
+      <Layout
+        heading="Resource Builder"
+        sidebarActive={sidebarActive}
+        setSidebarActive={setSidebarActive}
+      >
         <div className="builder-main-page">
           <div className="row">
             <div className="col-12 col-md-9">
@@ -34,7 +38,10 @@ export default function Builders() {
                 </div>
                 <div className="col-12 col-sm-6 col-xxl-4">
                   <div className="course-bulider rounded-4 my-3 transition">
-                    <Link className="course-builder-item d-flex align-items-center p-3 py-3 gap-4 text-decoration-none black-text">
+                    <Link
+                      to="/course-new"
+                      className="course-builder-item d-flex align-items-center p-3 py-3 gap-4 text-decoration-none black-text"
+                    >
                       <img
                         width={50}
                         src="/images/builder-img2.png"
@@ -100,7 +107,9 @@ export default function Builders() {
                         src="/images/builder-img5.png"
                         alt="builder"
                       />
-                      <h3>Event <br /> Builder</h3>
+                      <h3>
+                        Event <br /> Builder
+                      </h3>
                       <p className="ms-auto pe-2">
                         <img
                           src="/images/svg/arrow-right.svg"

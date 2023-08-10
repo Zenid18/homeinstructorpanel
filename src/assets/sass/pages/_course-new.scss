@@ -1,0 +1,48 @@
+.course-new-main-box {
+  .course-new {
+    .heading-box {
+      .heading {
+        .course-new-box {
+          .dropdown {
+            .dropdown-toggle {
+              &::after {
+                content: unset;
+              }
+            }
+          }
+        }
+      }
+      .workflow-box{
+        .workflow-btn{
+            button{
+                font-size: var(--fs-12);
+                &:nth-child(1){
+                    background: var(--red);
+                }
+                &:nth-child(2){
+                    background: var(--green);
+                }
+            }
+        }
+        .add-new-course-btn{
+            button{
+                font-size: var(--fs-13);
+                color: var(--d-grey);
+            }
+        }
+      }
+    }
+    .course-new-data-box{
+        .course-selection{
+            .form-check{
+                .form-check-input{
+                    &:checked{
+                        background-color: var(--white);
+                        border: 2px solid var(--black);
+                    }
+                }
+            }
+        }
+    }
+  }
+}
