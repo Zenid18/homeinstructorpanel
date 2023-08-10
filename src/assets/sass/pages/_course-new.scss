@@ -37,8 +37,10 @@
             .form-check{
                 .form-check-input{
                     &:checked{
-                        background-color: var(--white);
-                        border: 2px solid var(--black);
+                        border: 3px solid var(--white);
+                        background:var(--black) ;
+                        outline: 2px solid var(--black);
+                        box-shadow: unset;
                     }
                 }
             }
