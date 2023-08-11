@@ -1,17 +1,14 @@
-import React, { useState } from "react";
-// import { TeacherLogin } from "../redux/services/AuthService";
+import React, { useState } from "react"; 
 import { TeacherLogin } from "../../redux/services/AuthService";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useFormik } from "formik";
 import * as Yup from 'yup'
-
 export default function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [showPassInstructors, setShowPassInstructors] = useState(false);
-  const isLoading = useSelector((state) => state.authReducer.isLoading);
+  const [showPassInstructors, setShowPassInstructors] = useState(false); 
   const formik = useFormik({
     initialValues: {
       email: "",

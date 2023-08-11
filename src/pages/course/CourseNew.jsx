@@ -1,7 +1,6 @@
 import React from "react";
 import Layout from "../../layout/layout";
 import { Link } from "react-router-dom";
-
 export default function CourseNew() {
   return (
     <div className="course-new-main-box">

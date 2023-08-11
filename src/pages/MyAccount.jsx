@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Layout from "../layout/layout";
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { TeacherProfile, updateTeacherProfile } from "../redux/services/AuthService";
 import { useFormik } from "formik";
 import PhoneInput from "react-phone-input-2";
@@ -9,12 +9,9 @@ import "react-phone-input-2/lib/bootstrap.css";
 import * as Yup from 'yup'
 import * as url from '../constants/urls'
 import { toast } from "react-toastify";
-
 export default function MyAccount() {
   const dispatch = useDispatch()
-  const [sidebarActive, setSidebarActive] = useState("my-account");
-  const [showPassInstructors, setShowPassInstructors] = useState(false);
-  const [showConPassInstructors, setShowConPassInstructors] = useState(false);
+  const [sidebarActive, setSidebarActive] = useState("my-account"); 
   const [profileData, setProfileData] = useState([])
   const [phoneNo, setPhoneNo] = useState("");
   const [dialCode, setDialCode] = useState("");

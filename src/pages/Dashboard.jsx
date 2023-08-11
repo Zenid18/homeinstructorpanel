@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import Layout from "../layout/layout";
 import Chart from "../components/chart";
-
 export default function Dashboard() {
-      const [sidebarActive, setSidebarActive] = useState("dashboard");
+ const [sidebarActive, setSidebarActive] = useState("dashboard");
   return (
     <div>
       <Layout

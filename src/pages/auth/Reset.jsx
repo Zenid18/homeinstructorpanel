@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { TeacherLogin, resetPassword } from "../../redux/services/AuthService";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { resetPassword } from "../../redux/services/AuthService";
+import { useDispatch } from "react-redux";
+import {  useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useFormik } from "formik";
 import * as Yup from 'yup'
@@ -19,8 +19,8 @@ export default function Reset() {
       comPassword: "",
     },
     validationSchema: Yup.object({
-      // newPassword: Yup.string().required(" New Password is required"),
-      // conpassword: Yup.string().required(" Confirm Password is required"),
+      newPassword: Yup.string().required(" New Password is required"),
+      conpassword: Yup.string().required(" Confirm Password is required"),
     }),
     onSubmit: async () => {
       const body = {
@@ -38,8 +38,6 @@ export default function Reset() {
       formik.setSubmitting(false);
     },
   });
-
-  console.log(data, '//////')
   return (
     // MAIN DIV
     <div className="login-section vw-100 vh-100 d-flex align-items-start justify-content-center">

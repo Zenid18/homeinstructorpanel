@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import Layout from "../layout/layout";
 import { Link } from "react-router-dom";
-
 export default function Builders() {
-        const [sidebarActive, setSidebarActive] = useState("builders");
+ const [sidebarActive, setSidebarActive] = useState("builders");
   return (
     <div className="">
       <Layout

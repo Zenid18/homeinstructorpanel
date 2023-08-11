@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { TeacherForgot } from "../../redux/services/AuthService";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -18,8 +18,7 @@ export default function Forgot() {
     onSubmit: async () => {
       const body = {
         email_id: formik?.values?.email,
-      };
-      console.log(body);
+      }; 
       const res = await dispatch(TeacherForgot(body));
       if (res?.status == 200 || res?.success == true) {
         toast.success(res?.message);

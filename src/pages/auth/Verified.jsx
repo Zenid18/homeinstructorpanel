@@ -1,6 +1,5 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-
 export default function Verified() {
   const navigate = useNavigate()
   const location = useLocation();

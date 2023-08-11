@@ -2,8 +2,7 @@ import React, { useEffect, useState } from "react";
 import { TeacherForgot, TeacherOtp } from "../../redux/services/AuthService";
 import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
-import { useFormik } from "formik";
+import { toast } from "react-toastify"; 
 import OtpInput from "react-otp-input";
 import * as Yup from "yup";
 export default function Otp() {
