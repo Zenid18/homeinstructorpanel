@@ -6,3 +6,4 @@ export const TEACHER_PROFILE = "/index/instructor_teacher_detial";
 export const PROFILE_UPDATE = "/index/edit_instructor"
 export const CHANGE_PASS = "/index/instructor_change_password"
 export const RESET_PASSWORD = "/index/reset_instructor_password"
+export const COURSE_ADD = "/index/add_course";

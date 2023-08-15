@@ -1,6 +1,31 @@
-import { changePasswordError, changePasswordLoading, changePasswordSuccess, resetPasswordError, resetPasswordLoading, resetPasswordSucess, teacherForgotError, teacherForgotLoading, teacherForgotSuccess, teacherLoginError, teacherLoginLoading, teacherLoginSuccess, teacherOtpError, teacherOtpLoading, teacherOtpSuccess, teacherProfileError, teacherProfileLoading, teacherProfileSuccess, teacherUpdateProfileError, teacherUpdateProfileLoading, teacherUpdateProfileSuccess } from "../actions/AuthAction";
+import {
+  changePasswordError,
+  changePasswordLoading,
+  changePasswordSuccess,
+  courseAddError,
+  courseAddLoading,
+  courseAddSucess,
+  resetPasswordError,
+  resetPasswordLoading,
+  resetPasswordSucess,
+  teacherForgotError,
+  teacherForgotLoading,
+  teacherForgotSuccess,
+  teacherLoginError,
+  teacherLoginLoading,
+  teacherLoginSuccess,
+  teacherOtpError,
+  teacherOtpLoading,
+  teacherOtpSuccess,
+  teacherProfileError,
+  teacherProfileLoading,
+  teacherProfileSuccess,
+  teacherUpdateProfileError,
+  teacherUpdateProfileLoading,
+  teacherUpdateProfileSuccess,
+} from "../actions/AuthAction";
 import * as url from "../../constants/urls";
-import * as Service from '../../constants/services'
+import * as Service from "../../constants/services";
 import { storeData, getData, storageKey } from "../../constants/storage";
 
 export const TeacherLogin = (body) => async (dispatch) => {
@@ -12,8 +37,7 @@ export const TeacherLogin = (body) => async (dispatch) => {
       console.log(response, "LOGIN_API-----------");
       storeData(storageKey?.AUTH_TOKEN, response?.token);
       storeData(storageKey.USER_DATA, JSON.stringify(response.data));
-    }
-    else {
+    } else {
       dispatch(teacherLoginSuccess(false));
     }
     return response;
@@ -30,9 +54,7 @@ export const TeacherForgot = (body) => async (dispatch) => {
     if (response.success == true || response?.status == 200) {
       dispatch(teacherForgotSuccess(false));
       console.log(response, "Forgot_API-----------");
- 
-    }
-    else {
+    } else {
       dispatch(teacherForgotSuccess(false));
     }
     return response;
@@ -49,9 +71,7 @@ export const TeacherOtp = (body) => async (dispatch) => {
     if (response.success == true || response?.status == 200) {
       dispatch(teacherOtpSuccess(false));
       console.log(response, "Otp_API-----------");
-      
-    }
-    else {
+    } else {
       dispatch(teacherOtpSuccess(false));
     }
     return response;
@@ -65,13 +85,12 @@ export const TeacherProfile = () => async (dispatch) => {
   dispatch(teacherProfileLoading(true));
   const token = getData(storageKey.AUTH_TOKEN);
   try {
-    const response = await Service.get(url.TEACHER_PROFILE, token,);
+    const response = await Service.get(url.TEACHER_PROFILE, token);
     if (response.success == true || response?.status == 200) {
       dispatch(teacherProfileSuccess(false));
       console.log(response, "PROFILE-----------");
       // storeData(storageKey.USER_DATA, JSON.stringify(response.data));
-    }
-    else {
+    } else {
       dispatch(teacherProfileSuccess(false));
     }
     return response;
@@ -85,7 +104,11 @@ export const updateTeacherProfile = (body) => async (dispatch) => {
   const token = getData(storageKey.AUTH_TOKEN);
   dispatch(teacherUpdateProfileLoading(true));
   try {
-    const response = await Service.uploadImageApi(url.PROFILE_UPDATE, token, body);
+    const response = await Service.uploadImageApi(
+      url.PROFILE_UPDATE,
+      token,
+      body
+    );
     console.log("updateAccountDetails --", response);
     // dispatch both loading and success actions with the updated account details data
     dispatch(teacherUpdateProfileLoading(true));
@@ -114,9 +137,6 @@ export const TeacherChangePassword = (body) => async (dispatch) => {
     return { message: error };
   }
 };
-
-
-
 export const resetPassword = (body) => async (dispatch) => {
   dispatch(resetPasswordLoading(true));
   try {
@@ -124,13 +144,29 @@ export const resetPassword = (body) => async (dispatch) => {
     if (response.success == true || response?.status == 200) {
       dispatch(resetPasswordSucess(false));
       console.log(response, "LOGIN_API-----------");
-
     }
 
     return response;
   } catch (error) {
     // console.log(error, 'err-----------');
     dispatch(resetPasswordError(false));
+    return { message: error };
+  }
+};
+export const courseAdd = (body) => async (dispatch) => {
+  dispatch(courseAddLoading(true));
+  try {
+    const response = await Service.post(url.COURSE_ADD, "", body);
+    if (response.success == true || response?.status == 200) {
+      dispatch(courseAddSucess(false));
+      console.log(response, "Otp_API-----------");
+    } else {
+      dispatch(courseAddSucess(false));
+    }
+    return response;
+  } catch (error) {
+    // console.log(error, 'err-----------');
+    dispatch(courseAddError(false));
     return { message: error };
   }
 };

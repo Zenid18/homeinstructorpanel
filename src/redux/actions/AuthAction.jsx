@@ -2,6 +2,9 @@ import {
   CHANGE_PASSWORD_ERROR,
   CHANGE_PASSWORD_LOADING,
   CHANGE_PASSWORD_SUCCESS,
+  COURSE_ADD_ERROR,
+  COURSE_ADD_LOADING,
+  COURSE_ADD_SUCESS,
   RESET_PASSWORD_ERROR,
   RESET_PASSWORD_LOADING,
   RESET_PASSWORD_SUCESS,
@@ -139,9 +142,6 @@ export const changePasswordError = (isLoading) => {
 }
 
 
-
-
-
 export const resetPasswordLoading = (isLoading) => {
   return {
     type: RESET_PASSWORD_LOADING,
@@ -158,6 +158,25 @@ export const resetPasswordSucess = (isLoading, data) => {
 export const resetPasswordError = (isLoading) => {
   return {
     type: RESET_PASSWORD_ERROR,
+    isLoading: isLoading,
+  };
+}
+export const courseAddLoading = (isLoading) => {
+  return {
+    type: COURSE_ADD_LOADING,
+    isLoading: isLoading,
+  };
+}
+export const courseAddSucess = (isLoading, data) => {
+  return {
+    type: COURSE_ADD_SUCESS,
+    isLoading: isLoading,
+    data: data,
+  };
+};
+export const courseAddError = (isLoading) => {
+  return {
+    type: COURSE_ADD_ERROR,
     isLoading: isLoading,
   };
 }

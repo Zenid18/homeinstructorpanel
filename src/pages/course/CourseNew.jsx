@@ -1,7 +1,40 @@
-import React from "react";
+import React, { useState } from "react";
 import Layout from "../../layout/layout";
-import { Link } from "react-router-dom";
+import { courseAdd } from "../../redux/services/AuthService";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+
 export default function CourseNew() {
+  const [courseTab, setCourseTab] = useState("descriptions");
+  const [courseType, setCourseType] = useState("premium");
+    // const formik = useFormik({
+    //   initialValues: {
+    //     email: "",
+    //     password: "",
+    //   },
+    //   validationSchema: Yup.object({
+    //     email: Yup.string().email().required("Email is required"),
+    //     password: Yup.string().required("Password is required"),
+    //   }),
+    //   onSubmit: async () => {
+    //     const body = {
+    //       email_id: formik?.values?.email,
+    //       password: formik?.values?.password,
+    //     };
+    //     console.log(body);
+    //     const res = await dispatch(TeacherLogin(body));
+    //     if (res?.status == 200 || res?.success == true) {
+    //       toast.success(res?.message);
+    //       navigate("/dashboard", { replace: true });
+    //     } else {
+    //       toast.error(res?.message);
+    //     }
+    //     formik.setSubmitting(false);
+    //   },
+    // });
   return (
     <div className="course-new-main-box">
       <Layout courseLayout={true} heading="Create New Course">
@@ -67,45 +100,56 @@ export default function CourseNew() {
                   </div>
                 </div>
               </div>
-              <div className="course-new-data-box mx-auto w-50 p-2  ">
+              <div className="course-new-data-box mx-auto w-75 p-2  ">
                 <div className="heading fw-600">Course type</div>
                 <form action="">
                   <div className="course-selection d-flex gap-4 py-2">
                     <div class="form-check">
                       <input
-                        class="form-check-input"
+                        class="form-check-input cursor-pointer"
                         type="radio"
-                        name="flexRadioDefault"
-                        id="flexRadioDefault1"
+                        name="courseType"
+                        onClick={() => setCourseType("free")}
+                        id="courseType1"
+                        checked={courseType == "free" ? true : false}
                       />
-                      <label class="form-check-label" for="flexRadioDefault1">
+                      <label
+                        class="form-check-label cursor-pointer"
+                        for="courseType1"
+                      >
                         Free
                       </label>
                     </div>
                     <div class="form-check">
                       <input
-                        class="form-check-input"
+                        class="form-check-input cursor-pointer"
                         type="radio"
-                        name="flexRadioDefault"
-                        id="flexRadioDefault2"
-                        checked
+                        onClick={() => setCourseType("premium")}
+                        name="courseType"
+                        id="courseType2"
+                        checked={courseType == "premium" ? true : false}
                       />
-                      <label class="form-check-label" for="flexRadioDefault2">
+                      <label
+                        class="form-check-label cursor-pointer"
+                        for="courseType2"
+                      >
                         Premium
                       </label>
                     </div>
                   </div>
                   <div className="form-data">
                     <div className="row">
-                      <div className="col-12">
-                        <div className="input-box py-2">
-                          <input
-                            className="border w-100 border-2 py-1 px-3"
-                            type="text"
-                            placeholder="$0.00"
-                          />
+                      {courseType == "premium" && (
+                        <div className="col-12">
+                          <div className="input-box py-2">
+                            <input
+                              className="border w-100 border-2 py-1 px-3"
+                              type="text"
+                              placeholder="$0.00"
+                            />
+                          </div>
                         </div>
-                      </div>
+                      )}
                       <div className="col-6">
                         <div className="input-box py-2">
                           <label className="fw-600 pb-1" htmlFor="category">
@@ -152,18 +196,56 @@ export default function CourseNew() {
                       </div>
                       <div className="col-12">
                         <div className="form-tab-box">
-                          <div className="form-tab py-2">
-                            <button className="border-0 bg-transparent">
+                          <div className="form-tab py-2 d-flex gap-5">
+                            <button
+                              onClick={() => setCourseTab("requirements")}
+                              type="button"
+                              className={`border-0 bg-transparent ${
+                                courseTab == "requirements"
+                                  ? "fw-600 text-decoration-underline"
+                                  : ""
+                              } `}
+                            >
                               Requirements
                             </button>
-                            <button className="border-0 bg-transparent">
+                            <button
+                              onClick={() => setCourseTab("descriptions")}
+                              type="button"
+                              className={`border-0 bg-transparent ${
+                                courseTab == "descriptions"
+                                  ? "fw-600 text-decoration-underline"
+                                  : ""
+                              } `}
+                            >
                               Descriptions
                             </button>
-                            <button className="border-0 bg-transparent">
+                            <button
+                              type="button"
+                              onClick={() => setCourseTab("whoCourse")}
+                              className={`border-0 bg-transparent ${
+                                courseTab == "whoCourse"
+                                  ? "fw-600 text-decoration-underline"
+                                  : ""
+                              } `}
+                            >
                               Who the course is for
                             </button>
                           </div>
-                          <textarea className="w-100 border border-2 p-2" placeholder="Type here" rows={4}></textarea>
+                          <textarea
+                            className="w-100 border border-2 p-2"
+                            placeholder="Type Requirements"
+                            rows={4}
+                          ></textarea>
+                          <textarea
+                            className="w-100 border border-2 p-2"
+                            placeholder="Type Descriptions"
+                            rows={4}
+                          ></textarea>
+                          <textarea
+                            className="w-100 border border-2 p-2"
+                            placeholder="Type Who the course is for"
+                            rows={4}
+                          ></textarea>
                         </div>
                       </div>
                       <div className="col-12">
@@ -172,13 +254,10 @@ export default function CourseNew() {
                             <input
                               class="form-check-input"
                               type="radio"
-                              name="flexRadioDefault"
-                              id="flexRadioDefault1"
+                              name="uploadType"
+                              id="image"
                             />
-                            <label
-                              class="form-check-label"
-                              for="flexRadioDefault1"
-                            >
+                            <label class="form-check-label" for="image">
                               Image
                             </label>
                           </div>
@@ -186,14 +265,11 @@ export default function CourseNew() {
                             <input
                               class="form-check-input"
                               type="radio"
-                              name="flexRadioDefault"
-                              id="flexRadioDefault2"
+                              name="uploadType"
+                              id="video"
                               checked
                             />
-                            <label
-                              class="form-check-label"
-                              for="flexRadioDefault2"
-                            >
+                            <label class="form-check-label" for="video">
                               Video
                             </label>
                           </div>
