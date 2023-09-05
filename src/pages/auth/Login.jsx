@@ -1,5 +1,4 @@
-import React, { useState } from "react"; 
-import { TeacherLogin } from "../../redux/services/AuthService";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -8,7 +7,7 @@ import * as Yup from 'yup'
 export default function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [showPassInstructors, setShowPassInstructors] = useState(false); 
+  const [showPassInstructors, setShowPassInstructors] = useState(false);
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -23,14 +22,14 @@ export default function Login() {
         email_id: formik?.values?.email,
         password: formik?.values?.password,
       };
-      console.log(body);
-      const res = await dispatch(TeacherLogin(body));
-      if (res?.status == 200 || res?.success == true) {
-        toast.success(res?.message);
-        navigate("/dashboard", { replace: true });
-      } else {
-        toast.error(res?.message);
-      }
+      navigate("/dashboard", { replace: true });
+      // const res = await dispatch(TeacherLogin(body));
+      // if (res?.status == 200 || res?.success == true) {
+      //   toast.success(res?.message);
+      //   navigate("/dashboard", { replace: true });
+      // } else {
+      //   toast.error(res?.message);
+      // }
       formik.setSubmitting(false)
 
     }

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { resetPassword } from "../../redux/services/AuthService";
 import { useDispatch } from "react-redux";
-import {  useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useFormik } from "formik";
 import * as Yup from 'yup'
@@ -28,13 +28,14 @@ export default function Reset() {
         confirm_password: formik?.values?.comPassword,
         email_id: data
       };
-      const res = await dispatch(resetPassword(body));
-      if (res?.status == 200 || res?.success == true) {
-        toast.success(res?.message);
-        navigate("/");
-      } else {
-        toast.error(res?.message);
-      }
+      navigate("/");
+      // const res = await dispatch(resetPassword(body));
+      // if (res?.status == 200 || res?.success == true) {
+      //   toast.success(res?.message);
+      //   navigate("/");
+      // } else {
+      //   toast.error(res?.message);
+      // }
       formik.setSubmitting(false);
     },
   });

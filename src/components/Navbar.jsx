@@ -22,17 +22,17 @@ export default function Navbar(props) {
     localStorage.removeItem(storageKey?.USER_DATA);
     navigate("/", { replace: true });
   };
-  useEffect(() => {
-    const getUser = async () => {
-      const data = await getData(storageKey?.USER_DATA);
-      const data1 = JSON?.parse(data);
-      if (data1) {
-        setImage(data1?.teacher_img);
-        setName(data1?.first_name + " " + data1?.last_name);
-      }
-    };
-    getUser();
-  }, []);
+  // useEffect(() => {
+  //   const getUser = async () => {
+  //     const data = await getData(storageKey?.USER_DATA);
+  //     const data1 = JSON?.parse(data);
+  //     if (data1) {
+  //       setImage(data1?.teacher_img);
+  //       setName(data1?.first_name + " " + data1?.last_name);
+  //     }
+  //   };
+  //   getUser();
+  // }, []);
   const formik = useFormik({
     initialValues: {
       oldPassword: "",
@@ -52,23 +52,24 @@ export default function Navbar(props) {
         new_password: formik?.values?.newPassword,
         confirm_password: formik?.values?.confirmPass,
       };
-      const res = await dispatch(TeacherChangePassword(body));
-      if (res?.status == 200 || res?.success == true) {
-        toast?.success(res?.message);
-        document.getElementById("closeAddModal").click();
-        formik.setFieldValue("oldPassword", "");
-        formik.setFieldValue("newPassword", "");
-        formik.setFieldValue("confirmPass", "");
-      } else {
-        toast?.error(res?.message);
-      }
+      document.getElementById("closeAddModal").click();
+      // const res = await dispatch(TeacherChangePassword(body));
+      // if (res?.status == 200 || res?.success == true) {
+      //   toast?.success(res?.message);
+      //   document.getElementById("closeAddModal").click();
+      //   formik.setFieldValue("oldPassword", "");
+      //   formik.setFieldValue("newPassword", "");
+      //   formik.setFieldValue("confirmPass", "");
+      // } else {
+      //   toast?.error(res?.message);
+      // }
 
       formik.setSubmitting(false);
     },
   });
   return (
     <>
-      <header className="header px-4 py-1 position-fixed transition" style={props.courseLayout ? {background:"var(--white)"}:{}}>
+      <header className="header px-4 py-1 position-fixed transition" style={props.courseLayout ? { background: "var(--white)" } : {}}>
         <nav className="navbar nav-bar-main navbar-expand-lg rounded-2 ">
           <div className="container-fluid">
             <button
@@ -111,9 +112,9 @@ export default function Navbar(props) {
                 <div className="profile-box d-flex gap-3 align-items-center justify-content-center">
                   <p className="fw-500">
                     {userAccountDetails?.first_name ||
-                    userAccountDetails?.last_name
+                      userAccountDetails?.last_name
                       ? userAccountDetails?.first_name +
-                        userAccountDetails?.last_name
+                      userAccountDetails?.last_name
                       : name}
                   </p>
                   <div className="profile-logo d-none d-lg-block">
@@ -129,7 +130,7 @@ export default function Navbar(props) {
                             src={
                               userAccountDetails?.teacher_img
                                 ? url?.BASE_URL +
-                                  userAccountDetails?.teacher_img
+                                userAccountDetails?.teacher_img
                                 : url?.BASE_URL + image
                             }
                             className="my-profile"
@@ -164,7 +165,7 @@ export default function Navbar(props) {
                               handleLogout();
                             }}
                             class="dropdown-item cursor-pointer"
-                            to=""
+
                           >
                             Log out
                           </span>
@@ -212,11 +213,10 @@ export default function Navbar(props) {
                     onBlur={formik.handleBlur}
                     name="oldPassword"
                     placeholder="password"
-                    className={`w-100 py-2 ps-4 rounded-pill transition ${
-                      formik.touched.oldPassword && formik.errors.oldPassword
-                        ? "border-danger"
-                        : ""
-                    }`}
+                    className={`w-100 py-2 ps-4 rounded-pill transition ${formik.touched.oldPassword && formik.errors.oldPassword
+                      ? "border-danger"
+                      : ""
+                      }`}
                   />
                   <button
                     type="button"
@@ -269,11 +269,10 @@ export default function Navbar(props) {
                     onBlur={formik.handleBlur}
                     value={formik.values.newPassword}
                     name="newPassword"
-                    className={`w-100 py-2 ps-4 rounded-pill transition ${
-                      formik.touched.newPassword && formik.errors.newPassword
-                        ? "border-danger"
-                        : ""
-                    }`}
+                    className={`w-100 py-2 ps-4 rounded-pill transition ${formik.touched.newPassword && formik.errors.newPassword
+                      ? "border-danger"
+                      : ""
+                      }`}
                   />
                   <button
                     type="button"
@@ -328,11 +327,10 @@ export default function Navbar(props) {
                     onBlur={formik.handleBlur}
                     value={formik.values.confirmPass}
                     name="confirmPass"
-                    className={`w-100 py-2 ps-4 rounded-pill transition ${
-                      formik.touched.confirmPass && formik.errors.confirmPass
-                        ? "border-danger"
-                        : ""
-                    }`}
+                    className={`w-100 py-2 ps-4 rounded-pill transition ${formik.touched.confirmPass && formik.errors.confirmPass
+                      ? "border-danger"
+                      : ""
+                      }`}
                   />
                   <button
                     type="button"

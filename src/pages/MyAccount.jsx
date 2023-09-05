@@ -11,39 +11,50 @@ import * as url from '../constants/urls'
 import { toast } from "react-toastify";
 export default function MyAccount() {
   const dispatch = useDispatch()
-  const [sidebarActive, setSidebarActive] = useState("my-account"); 
+  const [sidebarActive, setSidebarActive] = useState("my-account");
   const [profileData, setProfileData] = useState([])
   const [phoneNo, setPhoneNo] = useState("");
   const [dialCode, setDialCode] = useState("");
   const [imageUri, setImageUri] = useState(null)
   const [image, setImage] = useState(null)
-  useEffect(() => {
-    getInstructorProfile()
-  }, [])
-  const getInstructorProfile = async () => {
-    const res = await dispatch(TeacherProfile())
-    if (res?.status == 200 || res?.success) {
-      setProfileData(res?.data)
-      setDialCode(res?.data?.dailcode || "")
-      setPhoneNo(res?.data?.phone || "")
-      setImage(res?.data?.teacher_img ? url?.BASE_URL + res?.data?.teacher_img : "")  
-      setImageUri(res?.data?.teacher_img ? url?.BASE_URL + res?.data?.teacher_img : "")
-    }
-  }
+  // useEffect(() => {
+  //   getInstructorProfile()
+  // }, [])
+  // const getInstructorProfile = async () => {
+  //   const res = await dispatch(TeacherProfile())
+  //   if (res?.status == 200 || res?.success) {
+  //     setProfileData(res?.data)
+  //     setDialCode(res?.data?.dailcode || "")
+  //     setPhoneNo(res?.data?.phone || "")
+  //     setImage(res?.data?.teacher_img ? url?.BASE_URL + res?.data?.teacher_img : "")  
+  //     setImageUri(res?.data?.teacher_img ? url?.BASE_URL + res?.data?.teacher_img : "")
+  //   }
+  // }
   const formik = useFormik({
     enableReinitialize: true,
     initialValues: {
-      firstName: profileData?.first_name || "",
-      lastName: profileData?.last_name || "",
-      email: profileData?.email_id || "",
-      usercode: profileData?.user_code || "",
-      address: profileData?.address || "",
-      city: profileData?.city || "",
-      country: profileData?.country || "",
-      state: profileData?.state || "",
-      pincode: profileData?.pincode || "",
-      info: profileData?.about || "",
-      experi: profileData?.lang || "",
+      // firstName: profileData?.first_name || "",
+      // lastName: profileData?.last_name || "",
+      // email: profileData?.email_id || "",
+      // usercode: profileData?.user_code || "",
+      // address: profileData?.address || "",
+      // city: profileData?.city || "",
+      // country: profileData?.country || "",
+      // state: profileData?.state || "",
+      // pincode: profileData?.pincode || "",
+      // info: profileData?.about || "",
+      // experi: profileData?.lang || "",
+      firstName: "",
+      lastName: "",
+      email: "",
+      usercode: "",
+      address: "",
+      city: "",
+      country: "",
+      state: "",
+      pincode: "",
+      info: "",
+      experi: "",
       // phone: "",
     },
     validationSchema: Yup.object({
@@ -82,11 +93,11 @@ export default function MyAccount() {
       formData?.append("state", formik?.values?.state)
       formData?.append("about", formik?.values?.info)
       formData?.append("teacher_img", imageUri)
-      const res = await dispatch(updateTeacherProfile(formData))
-      if (res?.status == 200 || res?.success == true) {
-        toast.success(res?.message)
-        getInstructorProfile()
-      }
+      // const res = await dispatch(updateTeacherProfile(formData))
+      // if (res?.status == 200 || res?.success == true) {
+      //   toast.success(res?.message)
+      //   getInstructorProfile()
+      // }
     }
 
   })
@@ -123,11 +134,10 @@ export default function MyAccount() {
                         disabled
                         id="firstName"
                         placeholder="First Name"
-                        className={`ps-2 rounded-1 p-2 ${
-                          formik.touched.firstName && formik.errors.firstName
-                            ? "border-danger"
-                            : ""
-                        }`}
+                        className={`ps-2 rounded-1 p-2 ${formik.touched.firstName && formik.errors.firstName
+                          ? "border-danger"
+                          : ""
+                          }`}
                         type="text"
                         onChange={formik?.handleChange}
                         onBlur={formik?.onBlur}
@@ -149,11 +159,10 @@ export default function MyAccount() {
                         disabled
                         id="lastName"
                         placeholder="Last Name"
-                        className={`ps-2 rounded-1 p-2 ${
-                          formik.touched.lastName && formik.errors.lastName
-                            ? "border-danger"
-                            : ""
-                        }`}
+                        className={`ps-2 rounded-1 p-2 ${formik.touched.lastName && formik.errors.lastName
+                          ? "border-danger"
+                          : ""
+                          }`}
                         type="text"
                         onChange={formik?.handleChange}
                         onBlur={formik?.onBlur}
@@ -175,11 +184,10 @@ export default function MyAccount() {
                         disabled
                         id="email"
                         placeholder="Email ID"
-                        className={`ps-2 rounded-1 p-2 ${
-                          formik.touched.email && formik.errors.email
-                            ? "border-danger"
-                            : ""
-                        }`}
+                        className={`ps-2 rounded-1 p-2 ${formik.touched.email && formik.errors.email
+                          ? "border-danger"
+                          : ""
+                          }`}
                         type="email"
                         onChange={formik?.handleChange}
                         onBlur={formik?.onBlur}
@@ -221,11 +229,10 @@ export default function MyAccount() {
                       <input
                         id="experi"
                         placeholder="Language"
-                        className={`ps-2 rounded-1 p-2 ${
-                          formik.touched.experi && formik.errors.experi
-                            ? "border-danger"
-                            : ""
-                        }`}
+                        className={`ps-2 rounded-1 p-2 ${formik.touched.experi && formik.errors.experi
+                          ? "border-danger"
+                          : ""
+                          }`}
                         type="text"
                         onChange={formik?.handleChange}
                         onBlur={formik?.onBlur}
@@ -247,11 +254,10 @@ export default function MyAccount() {
                         disabled
                         id="usercode"
                         placeholder="usercode"
-                        className={`ps-2 rounded-1 p-2 ${
-                          formik.touched.usercode && formik.errors.usercode
-                            ? "border-danger"
-                            : ""
-                        }`}
+                        className={`ps-2 rounded-1 p-2 ${formik.touched.usercode && formik.errors.usercode
+                          ? "border-danger"
+                          : ""
+                          }`}
                         type="text"
                         onChange={formik?.handleChange}
                         onBlur={formik?.onBlur}
@@ -313,11 +319,10 @@ export default function MyAccount() {
                   <input
                     id="pincode"
                     placeholder="Pin code / Zip code"
-                    className={`ps-2 rounded-1 p-2 ${
-                      formik.touched.pincode && formik.errors.pincode
-                        ? "border-danger"
-                        : ""
-                    }`}
+                    className={`ps-2 rounded-1 p-2 ${formik.touched.pincode && formik.errors.pincode
+                      ? "border-danger"
+                      : ""
+                      }`}
                     onChange={formik?.handleChange}
                     onBlur={formik?.onBlur}
                     value={formik?.values?.pincode}
@@ -339,11 +344,10 @@ export default function MyAccount() {
                   <input
                     id="address"
                     placeholder="Address"
-                    className={`ps-2 rounded-1 p-2 ${
-                      formik.touched.address && formik.errors.address
-                        ? "border-danger"
-                        : ""
-                    }`}
+                    className={`ps-2 rounded-1 p-2 ${formik.touched.address && formik.errors.address
+                      ? "border-danger"
+                      : ""
+                      }`}
                     type="text"
                     onChange={formik?.handleChange}
                     onBlur={formik?.onBlur}
@@ -365,11 +369,10 @@ export default function MyAccount() {
                   <input
                     id="country"
                     placeholder="Country"
-                    className={`ps-2 rounded-1 p-2 ${
-                      formik.touched.country && formik.errors.country
-                        ? "border-danger"
-                        : ""
-                    }`}
+                    className={`ps-2 rounded-1 p-2 ${formik.touched.country && formik.errors.country
+                      ? "border-danger"
+                      : ""
+                      }`}
                     onChange={formik?.handleChange}
                     onBlur={formik?.onBlur}
                     value={formik?.values?.country}
@@ -391,11 +394,10 @@ export default function MyAccount() {
                   <input
                     id="state"
                     placeholder="state"
-                    className={`ps-2 rounded-1 p-2 ${
-                      formik.touched.state && formik.errors.state
-                        ? "border-danger"
-                        : ""
-                    }`}
+                    className={`ps-2 rounded-1 p-2 ${formik.touched.state && formik.errors.state
+                      ? "border-danger"
+                      : ""
+                      }`}
                     onChange={formik?.handleChange}
                     onBlur={formik?.onBlur}
                     value={formik?.values?.state}
@@ -417,11 +419,10 @@ export default function MyAccount() {
                   <input
                     id="city"
                     placeholder="City"
-                    className={`ps-2 rounded-1 p-2 ${
-                      formik.touched.city && formik.errors.city
-                        ? "border-danger"
-                        : ""
-                    }`}
+                    className={`ps-2 rounded-1 p-2 ${formik.touched.city && formik.errors.city
+                      ? "border-danger"
+                      : ""
+                      }`}
                     onChange={formik?.handleChange}
                     onBlur={formik?.onBlur}
                     value={formik?.values?.city}

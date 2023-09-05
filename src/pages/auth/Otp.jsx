@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { TeacherForgot, TeacherOtp } from "../../redux/services/AuthService";
 import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify"; 
+import { toast } from "react-toastify";
 import OtpInput from "react-otp-input";
 import * as Yup from "yup";
 export default function Otp() {
@@ -29,18 +29,19 @@ export default function Otp() {
   }, [timer]);
 
   const handleSendAgain = async () => {
-    const body = {
-      email_id: data,
-    }
-    const res = await dispatch(TeacherForgot(body))
-    if (res?.status == 200 || res?.success == true) {
-      toast?.success(res?.message)
-      setTimer(60);
-      setIsSendButtonDisabled(false);
-    }
-    else {
-      toast?.error(res?.message)
-    }
+    setTimer(60);
+    // const body = {
+    //   email_id: data,
+    // }
+    // const res = await dispatch(TeacherForgot(body))
+    // if (res?.status == 200 || res?.success == true) {
+    //   toast?.success(res?.message)
+    //   setTimer(60);
+    //   setIsSendButtonDisabled(false);
+    // }
+    // else {
+    //   toast?.error(res?.message)
+    // }
 
   };
 
@@ -54,14 +55,15 @@ export default function Otp() {
         email_id: data,
         otp: otp
       }
-      const res = await dispatch(TeacherOtp(body));
-      console.log(res, '????')
-      if (res?.status == 200 || res?.success == true) {
-        toast.success(res?.message);
-        navigate("/verified", { state: data });
-      } else {
-        toast.error(res?.message);
-      }
+      navigate("/verified", { state: data });
+      // const res = await dispatch(TeacherOtp(body));
+      // console.log(res, '????')
+      // if (res?.status == 200 || res?.success == true) {
+      //   toast.success(res?.message);
+      //   navigate("/verified", { state: data });
+      // } else {
+      //   toast.error(res?.message);
+      // }
     }
 
   }
